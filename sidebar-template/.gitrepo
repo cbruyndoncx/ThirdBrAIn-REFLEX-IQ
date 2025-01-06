@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/reflex-dev/sidebar-template
+	branch = main
+	commit = 73b7b44a1d9aec6f1df8c93a2eedc8e5833963c5
+	parent = 6483a45038d24c6b45bf1310885c501bb155e85e
+	method = merge
+	cmdver = 0.4.9
