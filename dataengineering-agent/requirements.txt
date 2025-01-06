@@ -1,0 +1,12 @@
+pydantic
+requests
+tenacity
+openai
+termcolor
+python-dotenv
+streamlit
+reflex
+PyPDF2
+tqdm
+arxiv
+tiktoken

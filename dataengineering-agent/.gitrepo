@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/abhishek-ch/dataengineering-agent
+	branch = main
+	commit = 01ee642b3f56fec8f567a26ba92f9c4d95287dcd
+	parent = 63dd672f029fcf24eb2ac909c82b1279a79ff4d2
+	method = merge
+	cmdver = 0.4.9
