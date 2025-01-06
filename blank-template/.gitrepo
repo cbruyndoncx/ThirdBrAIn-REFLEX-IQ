@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/reflex-dev/blank-template
+	branch = main
+	commit = 7a9a38a5bec8db1e9e755177a6a924d5fe7dcf0a
+	parent = d7f8ddddfaec14feca0db6e285b09c01ddbfa896
+	method = merge
+	cmdver = 0.4.9
