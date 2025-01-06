@@ -1,0 +1,4 @@
+reflex>=0.4.7
+llama-index
+traceloop-sdk
+llama-index-vector-stores-weaviate
