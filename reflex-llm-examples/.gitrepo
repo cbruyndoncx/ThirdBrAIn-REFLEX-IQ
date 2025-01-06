@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/reflex-dev/reflex-llm-examples
+	branch = main
+	commit = c2c4b40a1ae4cbf3646fb2c750b929368bd56e20
+	parent = 72395455d78e6ef8c5e90cf09eaffbe50ab60c8c
+	method = merge
+	cmdver = 0.4.9
