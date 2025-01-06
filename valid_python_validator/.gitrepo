@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/reflex-dev/valid_python_validator
+	branch = main
+	commit = 35a8ea80df9764b4b3acb99e5a1988ec5f22e484
+	parent = 122bb0fec4b2e6db77d716f6bdd3cca5cd9259dc
+	method = merge
+	cmdver = 0.4.9
