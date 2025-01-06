@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/reflex-dev/data-viewer
+	branch = main
+	commit = 711b4175d10902f3a5da9b4bfed1a7ecaae48ae3
+	parent = be6712253652611dc088c211ab1142a34a3855a9
+	method = merge
+	cmdver = 0.4.9
