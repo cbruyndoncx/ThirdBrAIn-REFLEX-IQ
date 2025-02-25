@@ -37,7 +37,7 @@ github_actions_configs = [
 ]
 ```
 
-# Reflex Deploy with Github Actions
+# Deploy with Github Actions
 
 This GitHub Action simplifies the deployment of Reflex applications to Reflex Cloud. It handles setting up the environment, installing the Reflex CLI, and deploying your app with minimal configuration.
 
@@ -84,7 +84,7 @@ Store your Reflex authentication token securely in your repository's secrets:
 2. Navigate to Settings > Secrets and variables > Actions > New repository secret.
 3. Create new secrets for `REFLEX_AUTH_TOKEN` and `REFLEX_PROJECT_ID`. 
 
-(Create a `REFLEX_AUTH_TOKEN` in the tokens tab of your UI, check out these [docs]({docs.hosting.additional_concepts.path}#tokens). 
+(Create a `REFLEX_AUTH_TOKEN` in the tokens tab of your UI, check out these [docs]({docs.hosting.tokens.path}#tokens). 
 
 The `REFLEX_PROJECT_ID` can be found in the UI when you click on the How to deploy button on the top right when inside a project and copy the ID after the `--project` flag.)
 

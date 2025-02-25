@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/reflex-dev/reflex-web
 	branch = main
-	commit = 02ee94ce821d10e8d9b5d145c9a84f60bf5227aa
-	parent = b47c3b25f71ec979a22fb28b930580df798ca916
+	commit = 2b46b669f09b9a03c5d3b8a621135e88e320fae7
+	parent = 0a930f6e31016d85505088b74032e6a162542db1
 	method = merge
 	cmdver = 0.4.9
