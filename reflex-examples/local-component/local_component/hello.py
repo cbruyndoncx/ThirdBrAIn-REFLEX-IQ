@@ -1,4 +1,5 @@
 """This component wraps the local `hello.js` which is supplied as an external asset."""
+
 import reflex as rx
 
 # Because the top-level element in Hello is a `<div>` and all other props are passed
@@ -7,7 +8,7 @@ from reflex.components.el.elements.typography import Div
 
 # Defining the asset with a module-relative path will result in copying the
 # file into a subdir of the .web/public directory
-component_asset = rx._x.asset("hello.js")
+component_asset = rx.asset(path="hello.js", shared=True)
 
 
 class Hello(Div):

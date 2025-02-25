@@ -208,7 +208,6 @@ class ChatState(rx.State):
     ) -> None:
         self.chat_interactions = self._fetch_messages()
 
-
     def set_prompt(
         self,
         prompt: str,
@@ -270,7 +269,7 @@ class ChatState(rx.State):
                     "You have already asked this question or have asked too many questions in the past 24 hours.",
                 )
 
-    @rx.background
+    @rx.event(background=True)
     async def submit_prompt(
         self,
     ):
