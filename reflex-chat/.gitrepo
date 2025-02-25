@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/reflex-dev/reflex-chat
 	branch = main
-	commit = fa8f03d7a0c04a8e6e891b7e8cbc7d5d064725cc
-	parent = 505e9204c44de799dbd221e654b8d95423982803
+	commit = 4f97ea182e274753e790f8fc5e9712b43b49d3ae
+	parent = b11e96f456204f84ab0e7f3637d68f81789c7dcf
 	method = merge
 	cmdver = 0.4.9
