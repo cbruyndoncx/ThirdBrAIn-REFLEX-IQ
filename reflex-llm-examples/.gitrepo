@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/reflex-dev/reflex-llm-examples
 	branch = main
-	commit = c2c4b40a1ae4cbf3646fb2c750b929368bd56e20
-	parent = 72395455d78e6ef8c5e90cf09eaffbe50ab60c8c
+	commit = 62304aba73de04af52d29c4888a8f91b794db9e1
+	parent = 1a40bb097a9cd88a3a2cd7413ff53a6ad2dfff83
 	method = merge
 	cmdver = 0.4.9

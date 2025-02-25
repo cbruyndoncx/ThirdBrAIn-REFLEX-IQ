@@ -1,0 +1,3 @@
+embedchain==0.1.126
+reflex>=0.6.7
+ollama==0.4.5
