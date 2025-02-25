@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from pathlib import Path
-from typing import TYPE_CHECKING, Dict, Iterable, Optional, Tuple, Type, Union
+from typing import TYPE_CHECKING, Dict, Iterable, Optional, Sequence, Tuple, Type, Union
 
 from reflex import constants
 from reflex.compiler import templates, utils
@@ -75,9 +75,10 @@ def _compile_app(app_root: Component) -> str:
     return templates.APP_ROOT.render(
         imports=utils.compile_imports(app_root._get_all_imports()),
         custom_codes=app_root._get_all_custom_code(),
-        hooks={**app_root._get_all_hooks_internal(), **app_root._get_all_hooks()},
+        hooks=app_root._get_all_hooks(),
         window_libraries=window_libraries,
         render=app_root.render(),
+        dynamic_imports=app_root._get_all_dynamic_imports(),
     )
 
 
@@ -149,7 +150,7 @@ def _compile_page(
         imports=imports,
         dynamic_imports=component._get_all_dynamic_imports(),
         custom_codes=component._get_all_custom_code(),
-        hooks={**component._get_all_hooks_internal(), **component._get_all_hooks()},
+        hooks=component._get_all_hooks(),
         render=component.render(),
         **kwargs,
     )
@@ -239,11 +240,19 @@ def _compile_components(
         component_renders.append(component_render)
         imports = utils.merge_imports(imports, component_imports)
 
+    dynamic_imports = {
+        comp_import: None
+        for comp_render in component_renders
+        if "dynamic_imports" in comp_render
+        for comp_import in comp_render["dynamic_imports"]
+    }
+
     # Compile the components page.
     return (
         templates.COMPONENTS.render(
             imports=utils.compile_imports(imports),
             components=component_renders,
+            dynamic_imports=dynamic_imports,
         ),
         imports,
     )
@@ -499,7 +508,7 @@ def compile_tailwind(
         The compiled Tailwind config.
     """
     # Get the path for the output file.
-    output_path = get_web_dir() / constants.Tailwind.CONFIG
+    output_path = str((get_web_dir() / constants.Tailwind.CONFIG).absolute())
 
     # Compile the config.
     code = _compile_tailwind(config)
@@ -536,7 +545,47 @@ def purge_web_pages_dir():
 
 
 if TYPE_CHECKING:
-    from reflex.app import UnevaluatedPage
+    from reflex.app import ComponentCallable, UnevaluatedPage
+
+
+def _into_component_once(component: Component | ComponentCallable) -> Component | None:
+    """Convert a component to a Component.
+
+    Args:
+        component: The component to convert.
+
+    Returns:
+        The converted component.
+    """
+    if isinstance(component, Component):
+        return component
+    if isinstance(component, (Var, int, float, str)):
+        return Fragment.create(component)
+    if isinstance(component, Sequence):
+        return Fragment.create(*component)
+    return None
+
+
+def into_component(component: Component | ComponentCallable) -> Component:
+    """Convert a component to a Component.
+
+    Args:
+        component: The component to convert.
+
+    Returns:
+        The converted component.
+
+    Raises:
+        TypeError: If the component is not a Component.
+    """
+    if (converted := _into_component_once(component)) is not None:
+        return converted
+    if (
+        callable(component)
+        and (converted := _into_component_once(component())) is not None
+    ):
+        return converted
+    raise TypeError(f"Expected a Component, got {type(component)}")
 
 
 def compile_unevaluated_page(
@@ -559,12 +608,7 @@ def compile_unevaluated_page(
         The compiled component and whether state should be enabled.
     """
     # Generate the component if it is a callable.
-    component = page.component
-    component = component if isinstance(component, Component) else component()
-
-    # unpack components that return tuples in an rx.fragment.
-    if isinstance(component, tuple):
-        component = Fragment.create(*component)
+    component = into_component(page.component)
 
     component._add_style_recursive(style or {}, theme)
 
@@ -669,10 +713,8 @@ class ExecutorSafeFunctions:
             The route, compiled component, and compiled page.
         """
         component, enable_state = compile_unevaluated_page(
-            route, cls.UNCOMPILED_PAGES[route]
+            route, cls.UNCOMPILED_PAGES[route], cls.STATE, style, theme
         )
-        component = component if isinstance(component, Component) else component()
-        component._add_style_recursive(style, theme)
         return route, component, compile_page(route, component, cls.STATE)
 
     @classmethod
